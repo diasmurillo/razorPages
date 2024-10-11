@@ -1,0 +1,67 @@
+@page 
+@model filmeApp.Pages_filmes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Novo filme</a>
+    
+</p>
+
+<form>
+    <p>
+        <select asp-for="GeneroFilme" asp-items="Model.Generos">
+            <option value="">Todos</option>
+        </select>
+        <label>Titulo do filme: <input type="text" asp-formaction="textoFiltro"> </label>
+        <input type="submit" value="Filtrar">
+        <a asp-page="Index">Limpar pesquisa</a>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Filme[0].Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filme[0].DataLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filme[0].Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filme[0].Preco)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Filme) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataLancamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
